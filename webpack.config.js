@@ -14,5 +14,22 @@ module.exports = {
         // chunkhash：每个chunk（块，输出的js文件）生成一个唯一的哈希字符串，“:8”意为指定八位哈希字符串
         filename: '[name]_[chunkhash:8].js',
     },
+    module: {
+        rules: [
+            {
+                test: /\.(png|jpe?g|gif)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        name: '[name]_[hash].[ext]',
+                        // 打包后输出的位置
+                        outputPath: 'images/',
+                        // 小于2048kb的以base64形式打包在js文件中，可以减少http请求
+                        limit: 2048
+                    }
+                }
+            }
+        ],
+    },
     mode: 'development'
 }
