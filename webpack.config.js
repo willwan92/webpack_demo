@@ -12,7 +12,9 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         // name: 占位符，使用entry出配置的key或filename，未配置默认为main
         // chunkhash：每个chunk（块，输出的js文件）生成一个唯一的哈希字符串，“:8”意为指定八位哈希字符串
-        filename: '[name]_[chunkhash:8].js',
+        // filename: '[name]_[chunkhash:8].js',
+        // 暂时不要哈希后缀，方便调试
+        filename: '[name].js',
     },
     module: {
         rules: [
@@ -28,6 +30,11 @@ module.exports = {
                         limit: 2048
                     }
                 }
+            },
+            {
+                test: /\.(less|css)$/,
+                // loader执行顺序为从右往左，从下到上
+                use: ['style-loader', 'css-loader', 'less-loader']
             }
         ],
     },
