@@ -1,4 +1,7 @@
-const path = require('path')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 
 module.exports = {
     // 单页应用，单入口配置
@@ -14,7 +17,7 @@ module.exports = {
         // chunkhash：每个chunk（块，输出的js文件）生成一个唯一的哈希字符串，“:8”意为指定八位哈希字符串
         // filename: '[name]_[chunkhash:8].js',
         // 暂时不要哈希后缀，方便调试
-        filename: '[name].js',
+        filename: '[name]_[chunkhash:8].js',
     },
     module: {
         rules: [
@@ -43,5 +46,15 @@ module.exports = {
             }
         ],
     },
-    mode: 'production'
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: '首页',
+            filename: 'index.html',
+            template: './src/index.html',
+            // script标签的插入位置
+            inject: 'body'
+        }),
+        new CleanWebpackPlugin()
+    ],
+    mode: 'development'
 }
