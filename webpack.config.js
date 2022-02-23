@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = {
@@ -38,7 +39,7 @@ module.exports = {
                 test: /\.(less|css)$/,
                 // loader执行顺序为从右往左，从下到上
                 use: [
-                    'style-loader',
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
                     'less-loader',
                     'postcss-loader'
@@ -54,7 +55,10 @@ module.exports = {
             // script标签的插入位置
             inject: 'body'
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: '[name]_[contenthash:8].css'
+        })
     ],
     mode: 'development'
 }
