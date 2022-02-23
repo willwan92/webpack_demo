@@ -20,6 +20,8 @@ module.exports = {
         // 暂时不要哈希后缀，方便调试
         filename: '[name]_[chunkhash:8].js',
     },
+    // 生成map文件，生产环境建议关闭
+    devtool: 'eval-cheap-module-source-map',
     module: {
         rules: [
             {
