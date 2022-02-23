@@ -34,9 +34,14 @@ module.exports = {
             {
                 test: /\.(less|css)$/,
                 // loader执行顺序为从右往左，从下到上
-                use: ['style-loader', 'css-loader', 'less-loader']
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'less-loader',
+                    'postcss-loader'
+                ]
             }
         ],
     },
-    mode: 'development'
+    mode: 'production'
 }
