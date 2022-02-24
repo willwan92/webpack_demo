@@ -6,12 +6,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     // 单页应用，单入口配置
-    // entry: './src/index.js',
+    entry: './src/index.js',
     // 多页应用，多入口配置，输出多个js文件
-    entry: {
-        index: './src/index.js',
-        login: './src/login.js'
-    },
+    // entry: {
+    //     index: './src/index.js',
+    //     login: './src/login.js'
+    // },
     output: {
         path: path.resolve(__dirname, './dist'),
         // name: 占位符，使用entry出配置的key或filename，未配置默认为main
@@ -22,6 +22,11 @@ module.exports = {
     },
     // 生成map文件，生产环境建议关闭
     devtool: 'eval-cheap-module-source-map',
+    devServer: {
+        port: 'auto',
+        // 告知 dev server，从什么位置查找文件，默认是dist
+        static: './dist'
+    },
     module: {
         rules: [
             {
@@ -53,7 +58,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: '首页',
             filename: 'index.html',
-            template: './src/index.html',
+            template: './public/index.html',
             // script标签的插入位置
             inject: 'body'
         }),
